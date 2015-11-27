@@ -187,8 +187,6 @@ alias ack="ack-grep"
 alias gst="git status"
 export TERM="xterm-256color"
 
-export GEM_SERVER="http://gemserver.iba.com.br/"
-
 alias analise='cd /home/danilo/Documentos/iba/analise'
 setxkbmap -model thinkpad60 -layout br
 
@@ -203,12 +201,4 @@ shopt -s histappend                      # append to history, don't overwrite it
 export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/jre"
 export EC2_HOME="/usr/local/ec2/ec2-api-tools-1.7.3.0"
 export PATH=$PATH:$EC2_HOME/bin
-#oldexport AWS_ACCESS_KEY="AKIAJRRLO2C4LQKJP7IQ"
-export AWS_ACCESS_KEY="AKIAIEM64T4K2MWDY2FA"
-#oldexport AWS_SECRET_KEY="W2UcbTTZGcBeX8ohyOGH"
-export AWS_SECRET_KEY="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"
-export EC2_URL="https://ec2.us-east-1.amazonaws.com"
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-export SECRET_KEY_BASE="a25a723443b5e27040d8f182153295518fb4dad8c52238bd3ce90be3aff36a7e0c399b456e0b57a4d0439e0fd2c068f987be8a1ad7c582437c044f5af2fcb9ad"
