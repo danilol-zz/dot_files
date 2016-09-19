@@ -60,6 +60,9 @@ YELLOW='\e[1;33m'
 WHITE='\e[1;37m'
 NC='\e[0m' # No Color
 
+#tmux="tmux -2 -f ~/.tmux.conf"
+#tmux="tmux -2 -f ~/.tmux.conf"
+
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
@@ -112,7 +115,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -136,38 +139,49 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export RVM_SRC=~/.rvm/rubies/ruby-1.9.3-p194
-
-alias deploy='cap production deploy'
-
+alias wimdu='cd ~/projects/wimdu'
+#alias ts='cd ~/projects/integration/turbo_seeder/'
+#alias tru='cd ~/projects/integration/truman/'
+#alias rrr='cd ~/projects/integration/rrr-app/'
+#alias fetcher='cd ~/projects/integration/integration_fetchers/'
+#alias gaml='cd ~/projects/integration/gaml/'
+#alias ib='cd ~/projects/integration/ibridge/'
+#alias pulp='cd ~/projects/integration/pulp/'
+#alias up='cd ~/projects/wimdu; vagrant up default'
+#alias script='cd ~/projects/integration/integration_scripts/'
+alias vssh='vagrant ssh default'
 alias all_tests='bundle exec rake spec:all ; bundle exec rake jasmine:run_headless ; bundle exec cucumber -t ~@pending'
 
-#environment variables for mongodb
-export CAP_BASE_URL='localhost'
-export CAP_SITEMAP_PATH='localhost'
-export MONGOID_HOST='localhost'
-export MONGOID_PORT='27017'
-export MONGOID_USERNAME='root'
-export MONGOID_PASSWORD='root'
-export MONGOID_DATABASE='cap-products-development'
 
+alias dc='docker-compose'
+alias dcu='docker-compose up -d'
+alias dcs='docker-compose stop'
+alias dcr='docker-compose restart'
+alias dcb='docker-compose build'
+alias int='cd ~/projects/integration/integrations-infrastructure/'
+alias enq='cd ~/projects/integration/integrations-infrastructure/; pwd; docker-compose run fetcher rake seeding:enqueue_resource; cd -;'
+alias ts='cd ~/projects/integration/integrations-infrastructure/turbo_seeder/'
+alias tru='cd ~/projects/integration/integrations-infrastructure/truman/'
+alias fetcher='cd ~/projects/integration/integrations-infrastructure/integration_fetchers/'
+alias ib='cd ~/projects/integration/integrations-infrastructure/ibridge/'
+alias pulp='cd ~/projects/integration/integrations-infrastructure/pulp/'
+
+#environment variables for mongodb
 export JAVA_HOME=/opt/jdk1.7.0_03/bin/
 
 export EDITOR=vim
 export NLS_LANG="AMERICAN_AMERICA.WE8ISO8859P9"
-export ORACLE_HOME=/usr/lib/oracle/11.2/client64/
-export LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client64/lib/
-export TNS_NAMES=/abd/app/ess/current/config
 
 ##################
 # WELCOME SCREEN #
 ##################
 
-source ~/funcoeszz
+#source ~/funcoeszz
 clear
+#toilet -f mono9 -F metal Bem vindo!
 echo -ne "${LIGHTBLUE}Hello, $USER. today is, "; date
 echo -ne "${YELLOW}"
-cow=$(ls /usr/share/cowsay/cows/ | shuf | head -n1)
+#cow=$(ls /usr/share/cowsay/cows/ | shuf | head -n1)
 #fortune | cowsay -f tux
 zzramones | cowsay -f tux
 echo -ne "${NC}"
@@ -180,25 +194,29 @@ alias unhitch='hitch -u'
 # Uncomment to persist pair info between terminal instances
 # hitch
 
-alias olimpo='ssh olimpo'
 #export RUBYOPT='-Ku'
 
 alias ack="ack-grep"
+alias r.="cd ..; cd -"
 alias gst="git status"
 export TERM="xterm-256color"
 
-alias analise='cd /home/danilo/Documentos/iba/analise'
-setxkbmap -model thinkpad60 -layout br
+#setxkbmap -model thinkpad60 -layout br
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-tmux="tmux -2"
 
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 
-export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/jre"
-export EC2_HOME="/usr/local/ec2/ec2-api-tools-1.7.3.0"
-export PATH=$PATH:$EC2_HOME/bin
+export TUI_IMPORT_DIR="./data/input"
+export TUI_EXPORT_DIR="./data/output"
+
+alias ducks='du -cksh * | sort -rn | head'
+export REDIS_PATH="/usr/bin/redis-server"
+export RABBITMQ_URL="amqp://localhost:5672"
+export MONGODB_URL="mongodb://localhost:27017/"
+export PORT="3001"
+#export DOCKER_HOST="unix:///var/run/docker.sock"
 

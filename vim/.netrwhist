@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/danilo/projects/abril/iba/everything/commerce_client'
+let g:netrw_dirhist_2='/home/danilo/projects/abril/iba/everything/client_resource'
+let g:netrw_dirhist_3='/home/danilo/projects/abril/iba/everything/monitoring'
+let g:netrw_dirhist_4='/home/danilo/projects/pessoal/best_delivery'
+let g:netrw_dirhist_5='/home/danilo'
+let g:netrw_dirhist_6='/home/danilo/projects/pessoal/best_delivery'
+let g:netrw_dirhist_7='/home/danilo'
