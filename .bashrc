@@ -79,7 +79,7 @@ fi
 export color_prompt=yes
 
 if [ "$color_prompt" = yes ]; then
-  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;36m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w \[\033[00m\] \[\033[01;31m\]$(parse_git_branch) \[\033[00m\] \n\[\033[01;35m\]$ \[\033[00m\]'
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;36m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w \[\033[00m\] \[\033[01;31m\]$(parse_ruby_version) \[\033[01;31m\]$(parse_git_branch) \[\033[00m\] \n\[\033[01;35m\]$ \[\033[00m\]'
 else
   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;36m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w \[\033[00m\] \[\033[01;31m\]$(parse_git_branch) \[\033[00m\] \n\[\033[01;35m\]$ \[\033[00m\]'
 fi
@@ -89,6 +89,13 @@ unset color_prompt force_color_prompt
 # git branch
 parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
+}
+
+parse_ruby_version() {
+    rbv=`rvm-prompt`
+    rbv=${rbv#ruby-}
+    [[ $rbv == *"@"* ]] || rbv="${rbv}@default"
+    echo $rbv
 }
 
 # If this is an xterm set the title to user@host:dir
@@ -112,7 +119,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -136,69 +143,55 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export RVM_SRC=~/.rvm/rubies/ruby-1.9.3-p194
-
-alias deploy='cap production deploy'
-
+alias wimdu='cd ~/projects/wimdu'
+alias vssh='vagrant ssh default'
 alias all_tests='bundle exec rake spec:all ; bundle exec rake jasmine:run_headless ; bundle exec cucumber -t ~@pending'
 
-#environment variables for mongodb
-export CAP_BASE_URL='localhost'
-export CAP_SITEMAP_PATH='localhost'
-export MONGOID_HOST='localhost'
-export MONGOID_PORT='27017'
-export MONGOID_USERNAME='root'
-export MONGOID_PASSWORD='root'
-export MONGOID_DATABASE='cap-products-development'
+alias dc='docker-compose'
+alias dcu='docker-compose up -d'
+alias dcs='docker-compose stop'
+alias dcr='docker-compose restart'
+alias dcb='docker-compose build'
+alias pulp='cd ~/projects/integration/integrations-infrastructure/pulp/'
+alias d='cd ~/projects/bloomy_projects/bloomydays/'
 
+#environment variables for mongodb
 export JAVA_HOME=/opt/jdk1.7.0_03/bin/
 
 export EDITOR=vim
 export NLS_LANG="AMERICAN_AMERICA.WE8ISO8859P9"
-export ORACLE_HOME=/usr/lib/oracle/11.2/client64/
-export LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client64/lib/
-export TNS_NAMES=/abd/app/ess/current/config
 
 ##################
 # WELCOME SCREEN #
 ##################
 
-source ~/funcoeszz
+#source ~/funcoeszz
 clear
+#toilet -f mono9 -F metal Bem vindo!
 echo -ne "${LIGHTBLUE}Hello, $USER. today is, "; date
 echo -ne "${YELLOW}"
-cow=$(ls /usr/share/cowsay/cows/ | shuf | head -n1)
-#fortune | cowsay -f tux
-zzramones | cowsay -f tux
+#cow=$(ls /usr/share/cowsay/cows/ | shuf | head -n1)
+fortune | cowsay -f tux
+#zzramones | cowsay -f tux
 echo -ne "${NC}"
 
-hitch() {
-  command hitch "$@"
-  if [[ -s "$HOME/.hitch_export_authors" ]] ; then source "$HOME/.hitch_export_authors" ; fi
-}
-alias unhitch='hitch -u'
-# Uncomment to persist pair info between terminal instances
-# hitch
-
-alias olimpo='ssh olimpo'
-#export RUBYOPT='-Ku'
-
 alias ack="ack-grep"
+alias r.="cd ..; cd -"
+r.
 alias gst="git status"
 export TERM="xterm-256color"
-
-alias analise='cd /home/danilo/Documentos/iba/analise'
-setxkbmap -model thinkpad60 -layout br
+alias tenspec="for i in {1..10}; do rspec ; done"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-tmux="tmux -2"
 
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 
-export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/jre"
-export EC2_HOME="/usr/local/ec2/ec2-api-tools-1.7.3.0"
-export PATH=$PATH:$EC2_HOME/bin
-
+alias ducks='du -cksh * | sort -rn | head'
+export REDIS_PATH="/usr/bin/redis-server"
+export RABBITMQ_URL="amqp://localhost:5672"
+export MONGODB_URL="mongodb://localhost:27017/"
+export PORT="3001"
+#export DOCKER_HOST="unix:///var/run/docker.sock"
